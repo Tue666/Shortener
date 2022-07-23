@@ -1,25 +1,45 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
 
-function App() {
+// style
+import "./App.css";
+// components
+import Input from "./components/Input";
+import Domain from "./components/Domain";
+import Result from "./components/Result";
+
+const App = () => {
+  const [generatedCode, setGeneratedCode] = useState(null);
+  const [currentDomain, setCurrentDomain] = useState(1);
+
+  const handleChangeDomain = (index) => {
+    setCurrentDomain(index);
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <div className="wrapper">
+        <h5>Link Shorterner</h5>
+        <div className="spacing" />
+        <Input
+          currentDomain={currentDomain}
+          setGeneratedCode={setGeneratedCode}
+        />
+        <Domain
+          currentDomain={currentDomain}
+          handleChangeDomain={handleChangeDomain}
+        />
+        <div className="spacing" />
+        <p>With this free Link zxcnbzxmc</p>
+      </div>
+      {generatedCode && (
+        <div className="wrapper">
+          <Result
+            generatedCode={generatedCode}
+            setGeneratedCode={setGeneratedCode}
+          />
+        </div>
+      )}
     </div>
   );
-}
+};
 
 export default App;
